@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context="com.bcgdv.asia.dotsprogressindicator.MainActivity">
+
+    <com.bcgdv.asia.lib.dots.DotsProgressIndicator
+        android:id="@+id/dotsProgressIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        app:dotsMode="bestFit"
+        app:numberOfDots="4" />
+
+    <com.bcgdv.asia.lib.dots.DotsProgressIndicator
+        android:id="@+id/dotsProgressIndicatorView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dotsProgressIndicatorView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        app:dotsDiameter="20dp"
+        app:dotsMode="setSize"
+        app:dotsSpacing="2dp"
+        app:numberOfDots="6" />
+
+    <Button
+        android:id="@+id/btnToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Toggle" />
+
+</RelativeLayout>
