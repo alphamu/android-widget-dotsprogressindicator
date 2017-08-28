@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/bcgdv/android/dotsprogress/images/download.svg)](https://bintray.com/bcgdv/android/dotsprogress/_latestVersion)
+
 # DotsProgressIndicator widget for Android
 
 This is a indeterminate progress indicator for android that shows a dots bouncing animation for the progress indicator.
@@ -6,7 +8,7 @@ This is a indeterminate progress indicator for android that shows a dots bouncin
 
 ## Adding it to your project
 
-    implementation 'com.bcgdv.asia.lib:dots:1.0'
+    implementation 'com.bcgdv.asia.lib:dots:${dots_version}'
 
 ## Usage
 
