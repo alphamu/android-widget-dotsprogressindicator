@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/BCGDV-ASIA/android-widget-dotsprogressindicator'
     gitUrl = 'https://github.com/BCGDV-ASIA/android-widget-dotsprogressindicator.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'bcgdv'
     developerName = 'BCGDV Asia'
@@ -33,8 +33,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion compile_version
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
