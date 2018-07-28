@@ -3,11 +3,13 @@ package com.bcgdv.asia.lib.dots
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
+import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.os.Build
 import android.os.Handler
 import android.support.annotation.IntDef
 import android.support.v4.view.ViewCompat
@@ -69,6 +71,7 @@ class DotsProgressIndicator : View {
         setup(context, attrs)
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Suppress("unused")
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
         setup(context, attrs)
@@ -237,8 +240,21 @@ class DotsProgressIndicator : View {
             set.addListener(object : AbsAnimatorListener {
                 override fun onAnimationEnd(animator: Animator?) {
                     super.onAnimationEnd(animator)
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+                        return
+                    }
                     if (visibility == View.VISIBLE) {
-                        post({ start() })
+                        post { start() }
+                    }
+                }
+
+                override fun onAnimationEnd(animation: Animator?, isReverse: Boolean) {
+                    super.onAnimationEnd(animation, isReverse)
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                        return
+                    }
+                    if (visibility == View.VISIBLE) {
+                        post { start() }
                     }
                 }
             })
@@ -262,7 +278,7 @@ class DotsProgressIndicator : View {
             }
             showRunnable = Runnable {
                 super.setVisibility(visibility)
-                var success = true
+                var success = false
                 if (visibility == View.VISIBLE) {
                     success = start()
                 } else {
@@ -288,14 +304,6 @@ class DotsProgressIndicator : View {
         super.onDetachedFromWindow()
     }
 
-    override fun getSuggestedMinimumHeight(): Int {
-        return super.getSuggestedMinimumHeight()
-    }
-
-    override fun getSuggestedMinimumWidth(): Int {
-        return super.getSuggestedMinimumWidth()
-    }
-
     private fun getPaddingStartCompat(): Int {
         return ViewCompat.getPaddingStart(this)
     }
@@ -307,12 +315,12 @@ class DotsProgressIndicator : View {
     companion object {
         val visibilityHandler: Handler = Handler()
 
-        @IntDef(MODE_BEST_FIT.toLong(), MODE_SIZE_PROVIDED.toLong())
+        @IntDef(MODE_BEST_FIT, MODE_SIZE_PROVIDED)
         @Retention(AnnotationRetention.SOURCE)
         annotation class Mode
 
-        const private val MODE_BEST_FIT = 0
-        const private val MODE_SIZE_PROVIDED = 1
+        private const val MODE_BEST_FIT = 0
+        private const val MODE_SIZE_PROVIDED = 1
     }
 
 }

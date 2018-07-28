@@ -28,7 +28,6 @@ ext {
 
 android {
     compileSdkVersion compile_version
-    buildToolsVersion build_tools
 
     defaultConfig {
         minSdkVersion 15
@@ -45,6 +44,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 dokka {
@@ -56,6 +56,7 @@ dokka {
 buildscript {
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
@@ -67,10 +68,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "com.android.support:appcompat-v7:$support_lib"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()
+    jcenter()
+    google()
 }
 
 apply from: 'installv1.gradle'
