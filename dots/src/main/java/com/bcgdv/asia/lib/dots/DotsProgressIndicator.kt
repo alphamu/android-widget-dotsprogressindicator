@@ -278,7 +278,7 @@ class DotsProgressIndicator : View {
             }
             showRunnable = Runnable {
                 super.setVisibility(visibility)
-                var success = false
+                var success = true
                 if (visibility == View.VISIBLE) {
                     success = start()
                 } else {
