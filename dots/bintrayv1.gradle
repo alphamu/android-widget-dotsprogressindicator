@@ -8,8 +8,17 @@ if (project.hasProperty("kotlin")) { //Kotlin libraries
         from android.sourceSets.main.java.srcDirs
     }
 
-    task javadoc(type: Javadoc, dependsOn: dokka) {
-
+    task javadoc(type: org.jetbrains.dokka.gradle.DokkaTask, dependsOn: dokka) {
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        android.libraryVariants.all { variant ->
+            if (variant.name == 'release') {
+                owner.classpath += variant.javaCompileProvider.get().classpath
+            }
+        }
+        source = android.sourceSets.main.java.srcDirs
+        outputFormat = "javadoc"
+        outputDirectory = "$buildDir/dokkaJavadoc"
+        exclude '**/R.html', '**/R.*.html', '**/index.html', 'com/support/**', 'androidx/**', '**/*.kt'
     }
 } else if (project.hasProperty("android")) { // Android libraries
     task sourcesJar(type: Jar) {
@@ -17,9 +26,15 @@ if (project.hasProperty("kotlin")) { //Kotlin libraries
         from android.sourceSets.main.java.srcDirs
     }
 
-    task javadoc(type: Javadoc, dependsOn: dokka) {
-        source = android.sourceSets.main.java.srcDirs
+    task javadoc(type: Javadoc) {
         classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        android.libraryVariants.all { variant ->
+            if (variant.name == 'release') {
+                owner.classpath += variant.javaCompileProvider.get().classpath
+            }
+        }
+        source = android.sourceSets.main.java.srcDirs
+        exclude '**/R.html', '**/R.*.html', '**/index.html', 'com/support/**', 'androidx/**', '**/*.kt'
     }
 } else { // Java libraries
     task sourcesJar(type: Jar, dependsOn: classes) {

@@ -44,7 +44,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
 }
 
 dokka {
@@ -76,5 +76,5 @@ repositories {
     google()
 }
 
-apply from: 'installv1.gradle'
-apply from: 'bintrayv1.gradle'
+apply from: 'https://raw.githubusercontent.com/alphamu/JCenter/master/bintrayv1.gradle'
+apply from: 'https://raw.githubusercontent.com/alphamu/JCenter/master/installv1.gradle'
